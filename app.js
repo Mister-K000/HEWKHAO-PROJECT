@@ -4,9 +4,7 @@ const app = express();
 
 app.use(express.json())
 let db;
-const client = new MongoClient("mongodb://localhost:27017", {
-    useUnifiedTopology: true,
-});
+const client = new MongoClient("mongodb://localhost:27017");
 client.connect().then(() => {
     db = client.db("ecommerce");
     console.log("MongoDB connected");
@@ -19,6 +17,18 @@ client.connect().then(() => {
 app.get('/product', async (req, res) => {
     try {
         const product = await db.collection("product").find().toArray();
+        res.json(product);
+    } catch (err) {
+        res.json("error");
+    }
+});
+
+app.get('/product/topping/:topping', async (req, res) => {
+    try {
+        const topping = req.params.topping;
+        const product = await db.collection("product").find({
+            "topping": { $in: [{ "name": topping }] }
+        }).toArray();
         res.json(product);
     } catch (err) {
         res.json("error");
@@ -44,6 +54,22 @@ app.post('/product', async (req, res) => {
     try {
         const data = req.body;
         const product = await db.collection("product").insertOne(data);
+        res.json(product);
+    } catch (err) {
+        res.json("error");
+    }
+});
+
+// แก้ไขข้อมูล
+app.put('/product/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const product = await db.collection("product").updateOne({
+            "_id": new ObjectId(id)
+        }, {
+            $set: data
+        });
         res.json(product);
     } catch (err) {
         res.json("error");
