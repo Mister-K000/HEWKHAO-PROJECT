@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <script defer src="script.js"></script>
+    <style>
+        /* 🌌 Cyberpunk Theme */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0d0d0d;
+            color: #0ff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+        }
+
+        form {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input {
+            background: black;
+            border: 2px solid #0ff;
+            color: #0ff;
+            padding: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #f0f;
+            box-shadow: 0 0 10px #f0f;
+        }
+
+        button {
+            background: linear-gradient(90deg, #0ff, #f0f);
+            border: none;
+            color: black;
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #f0f, #0ff);
+            box-shadow: 0 0 10px #0ff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 10px;
+            margin: 5px auto;
+            width: 50%;
+            border-radius: 5px;
+            border-left: 5px solid #0ff;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        li:hover {
+            background: rgba(255, 0, 255, 0.2);
+            border-left-color: #f0f;
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 Students Management System</h1>
+    
+    <form id="studentForm">
+        <input type="hidden" id="editingId">
+        <input type="text" id="studentId" placeholder="STUDENT ID" required>
+        <input type="text" id="firstName" placeholder="FIRSTNAME" required>
+        <input type="text" id="lastName" placeholder="LASTNAME" required>
+        <button type="submit" id="submitButton">➕ ADD</button>
+    </form>
+
+    <!-- 📌 ช่องค้นหานักศึกษา -->
+    <input type="text" id="searchBox" placeholder="🔍 SEARCH ID/NAME">
+    <button onclick="searchStudents()">SEARCH</button>
+
+    <ul id="studentList"></ul>
+</body>
+</html>
